@@ -71,8 +71,10 @@ jobs:
                   image=$(echo "$line" | sed 's/--platform=[^ ]* //g' | sed 's/\//-/g')
                   new_image="${platform}-${image}"
               else
+                  image=$(echo "$line" | sed 's/\//-/g')
                   new_image=$(echo "$line" | sed 's/\//-/g')
               fi
+              echo "image: $image"
               echo "new_image: $new_image"
 
               # 获取镜像完整名称并移除@sha256等后缀
