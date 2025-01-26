@@ -1,7 +1,47 @@
 # =============== DB ===============
 # MySQL
 mysql:8.0
-bitnami/mysql:8.0
-bitnami/mysql:8.0@sha256:ec1e8d95b06e7f78c7f4ee0ed91f835dd39afff7c58e36ba1a4878732b60fcf9
---platform=linux/arm64 bitnami/mysql:8.0
-gcr.io/cadvisor/cadvisor:v0.39.3
+
+# PostgreSQL
+postgres:16.6
+
+# PostgreSQL & TimeScaleDB
+timescale/timescaledb:2.17.2-pg16
+
+# MongoDB
+mongo:8.0
+
+# Redis
+redis:7.4
+
+# =============== Language ===============
+# JDK
+eclipse-temurin:21-jdk-alpine
+eclipse-temurin:17-jdk-alpine
+eclipse-temurin:11-jdk-alpine
+eclipse-temurin:8-jdk-alpine
+
+# NodeJS
+node:22-alpine
+node:20-alpine
+node:18-alpine
+node:16-alpine
+
+# =============== Application ===============
+# Nginx
+nginx:1.27
+
+# Caddy
+caddy:2.9-alpine
+xiaosong/caddy-alidns:latest
+
+# EMQX
+emqx/emqx:5.8
+--platform=linux/arm64 emqx/emqx:5.8
+
+# Kafka
+apache/kafka:3.9
+bitnami/kafka:3.9
+
+# Nacos
+nacos/nacos-server:v2.5.0
