@@ -78,6 +78,9 @@ bitnami/mysql:8.0 => bitnami-mysql:8.0
 gcr.io/cadvisor/cadvisor:v0.39.3 => gcr.io-cadvisor-cadvisor:v0.39.3
 ```
 
+mysql:8.0@sha256:ec1e8d95b06e7f78c7f4ee0ed91f835dd39afff7c58e36ba1a4878732b60fcf9
+image=$(echo "$image" | sed 's/@[^:]\*//g')
+
 ### 定时执行
 
 修改/.github/workflows/docker.yaml 文件

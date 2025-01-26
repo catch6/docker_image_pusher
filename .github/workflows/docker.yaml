@@ -71,13 +71,16 @@ jobs:
 
               if [[ $line == *"--platform="* ]]; then
                   platform=$(echo "$line" | grep -oP '(?<=--platform=)[^ ]+')
-                  new_image=$(echo "${image}-${platform}" | sed 's/\//g')
+                  new_image=${image}-${platform}
               else
-                  new_image=$(echo "$image" | sed 's/\//-/g')
+                  new_image=$image
               fi
 
+              # \改为-
+              new_image=$(echo "$new_image" | sed 's/\//-/g')
+
               # 移除@sha256等后缀
-              new_image=$(echo "$new_image" | sed 's/@[^:]*//g')
+              new_image=$(echo "$new_image" | cut -d '@' -f 1)
 
               echo "new_image: $new_image"
 
