@@ -39,7 +39,7 @@ ALIYUN_NAME_SPACE,ALIYUN_REGISTRY_USER，ALIYUN_REGISTRY_PASSWORD，ALIYUN_REGIS
 配置成环境变量
 
 ### 添加镜像
-打开images.txt文件，添加你想要的镜像 
+打开images.txt文件，添加你想要的镜像
 可以加tag，也可以不用(默认latest)<br>
 可添加 --platform=xxxxx 的参数指定镜像架构<br>
 可使用 k8s.gcr.io/kube-state-metrics/kube-state-metrics 格式指定私库<br>
@@ -64,15 +64,12 @@ alpine 即 阿里云中显示的镜像名<br>
 指定后的架构会以前缀的形式放在镜像名字前面
 ![](doc/多架构.png)
 
-### 镜像重名
-程序自动判断是否存在名称相同, 但是属于不同命名空间的情况。
-如果存在，会把命名空间作为前缀加在镜像名称前。
-例如:
+### 镜像重名规则
+程序会使用命名空间作为镜像前缀
 ```
-xhofe/alist
-xiaoyaliu/alist
+mysql:8.0 => mysql:8.0
+bitnami/mysql:8.0 => bitnami-mysql:8.0
 ```
-![](doc/镜像重名.png)
 
 ### 定时执行
 修改/.github/workflows/docker.yaml文件
