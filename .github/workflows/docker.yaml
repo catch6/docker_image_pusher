@@ -73,7 +73,7 @@ jobs:
                   platform=$(echo "$line" | grep -oP '(?<=--platform=)[^ ]+')
                   new_image=$(echo "${image}-${platform}" | sed 's/\//g')
               else
-                  new_image=$(echo "$image" | sed 's/\./-/g' | sed 's/\//-/g')
+                  new_image=$(echo "$image" | sed 's/\//-/g')
               fi
 
               # 移除@sha256等后缀
