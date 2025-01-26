@@ -5,11 +5,6 @@
 - 支持最大40GB的大型镜像<br>
 - 使用阿里云的官方线路，速度快<br>
 
-视频教程：https://www.bilibili.com/video/BV1Zn4y19743/
-
-作者：**[技术爬爬虾](https://github.com/tech-shrimp/me)**<br>
-B站，抖音，Youtube全网同名，转载请注明作者<br>
-
 ## 使用方式
 
 
@@ -64,11 +59,12 @@ alpine 即 阿里云中显示的镜像名<br>
 指定后的架构会以前缀的形式放在镜像名字前面
 ![](doc/多架构.png)
 
-### 镜像重名规则
-程序会使用命名空间作为镜像前缀
+### 镜像命名规则
+
 ```
 mysql:8.0 => mysql:8.0
 bitnami/mysql:8.0 => bitnami-mysql:8.0
+gcr.io/cadvisor/cadvisor:v0.39.3 => gcr-io-cadvisor-cadvisor:v0.39.3
 ```
 
 ### 定时执行
