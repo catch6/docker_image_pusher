@@ -75,7 +75,7 @@ alpine 即 阿里云中显示的镜像名<br>
 mysql:8.0 => mysql:8.0
 bitnami/mysql:8.0 => bitnami-mysql:8.0
 --platform=linux/arm64 bitnami/mysql:8.0 => bitnami-mysql-linux-arm64:8.0
-gcr.io/cadvisor/cadvisor:v0.39.3 => gcr-io-cadvisor-cadvisor:v0.39.3
+gcr.io/cadvisor/cadvisor:v0.39.3 => gcr.io-cadvisor-cadvisor:v0.39.3
 ```
 
 ### 定时执行
