@@ -71,6 +71,7 @@ jobs:
 
               if [[ $line == *"--platform="* ]]; then
                   platform=$(echo "$line" | grep -oP '(?<=--platform=)[^ ]+')
+                  echo "platform: $platform"
                   new_image=${image}-${platform}
               else
                   new_image=$image

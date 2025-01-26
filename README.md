@@ -69,17 +69,15 @@ alpine 即 阿里云中显示的镜像名<br>
 指定后的架构会以前缀的形式放在镜像名字前面
 ![](doc/多架构.png)
 
-### 镜像命名规则
+### 镜像重命名规则
 
 ```
 mysql:8.0 => mysql:8.0
 bitnami/mysql:8.0 => bitnami-mysql:8.0
---platform=linux/arm64 bitnami/mysql:8.0 => bitnami-mysql-linux-arm64:8.0
+bitnami/mysql:8.0@sha256:ec1e8d95b06e7f78c7f4ee0ed91f835dd39afff7c58e36ba1a4878732b60fcf9 => bitnami-mysql:8.0
+--platform=linux/arm64 bitnami/mysql:8.0 => bitnami-mysql:8.0-linux-arm64
 gcr.io/cadvisor/cadvisor:v0.39.3 => gcr.io-cadvisor-cadvisor:v0.39.3
 ```
-
-mysql:8.0@sha256:ec1e8d95b06e7f78c7f4ee0ed91f835dd39afff7c58e36ba1a4878732b60fcf9
-image=$(echo "$image" | sed 's/@[^:]\*//g')
 
 ### 定时执行
 
