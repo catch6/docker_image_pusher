@@ -1,17 +1,23 @@
 # =============== DB ===============
 # MySQL
+mysql:latest
+mysql:lts
 mysql:8.0
 
 # PostgreSQL
+postgres:latest
 postgres:16.6
 
 # PostgreSQL & TimeScaleDB
+timescale/timescaledb:latest-pg16
 timescale/timescaledb:2.17.2-pg16
 
 # MongoDB
+mongo:latest
 mongo:8.0
 
 # Redis
+redis:latest
 redis:7.4
 
 # =============== Language ===============
@@ -29,18 +35,64 @@ node:16-alpine
 
 # =============== Application ===============
 # Nginx
+nginx:latest
+nginx:stable
 nginx:1.27
 
 # Caddy
+caddy:latest
 caddy:2.9-alpine
+
+# Caddy-alidns
 xiaosong/caddy-alidns:latest
 
 # EMQX
+emqx/emqx:latest
+--platform=linux/arm64 emqx/emqx:latest
 emqx/emqx:5.8
 --platform=linux/arm64 emqx/emqx:5.8
 
 # Kafka
+apache/kafka:latest
+apache/kafka:3.9.0
 apache/kafka:3.8.1
+bitnami/kafka:latest
+bitnami/kafka:3.9.0
+bitnami/kafka:3.8.1
 
 # Nacos
+nacos/nacos-server:latest
 nacos/nacos-server:v2.5.0
+
+# MinIO
+minio/minio:latest
+minio/minio:RELEASE.2025-01-20T14-49-07Z
+
+# Gitea
+gitea/gitea:latest
+gitea/gitea:1.23
+
+# CoreDNS
+coredns/coredns:latest
+coredns/coredns:1.12.0
+
+# LobeHub
+lobehub/lobe-chat:latest
+
+# Alist
+xiaoyaliu/alist:latest
+xiaoyaliu/alist:hostmode
+
+# Kafka UI
+provectuslabs/kafka-ui:latest
+
+# Yapi
+xuweijie1015/yapi:latest
+
+# Confluence
+haxqer/confluence:9.2.0
+haxqer/confluence:8.5.18
+
+# Jira
+haxqer/jira:10.3.2
+haxqer/jira:9.12.17
