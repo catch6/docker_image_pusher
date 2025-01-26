@@ -66,19 +66,19 @@ jobs:
               echo "docker pull $line"
               docker pull $line
 
+              image=$(echo "$line" | awk '{print $NF}')
+              echo "image: $image"
+
               if [[ $line == *"--platform="* ]]; then
                   platform=$(echo "$line" | grep -oP '(?<=--platform=)[^ ]+' | sed 's/\//-/g')
-                  image=$(echo "$line" | sed 's/--platform=[^ ]* //g' | sed 's/\//-/g')
-                  new_image="${platform}-${image}"
+                  new_image=$(echo "${platform}-${image}" | sed 's/\//-/g')
               else
-                  image=$(echo "$line" | sed 's/\//-/g')
                   new_image=$(echo "$line" | sed 's/\//-/g')
               fi
-              echo "image: $image"
-              echo "new_image: $new_image"
 
-              # 获取镜像完整名称并移除@sha256等后缀
+              # 移除@sha256等后缀
               new_image=$(echo "$new_image" | sed 's/@[^:]*//g')
+
               echo "new_image: $new_image"
 
               new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$new_image"
