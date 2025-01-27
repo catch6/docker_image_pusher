@@ -20,6 +20,10 @@ mongo:8.0
 redis:latest
 redis:7.4
 
+# TDengine
+tdengine/tdengine:latest
+tdengine/tdengine:3.3.5.2
+
 # =============== Language ===============
 # JDK
 eclipse-temurin:21-jdk-alpine
@@ -96,3 +100,14 @@ haxqer/confluence:8.5.18
 # Jira
 haxqer/jira:10.3.2
 haxqer/jira:9.12.17
+
+# Aria2 Pro
+p3terx/aria2-pro:latest
+
+# AriaNG
+p3terx/ariang:latest
+
+# FileBrowser
+filebrowser/filebrowser:latest
+filebrowser/filebrowser:v2
+filebrowser/filebrowser:v2.31.2
