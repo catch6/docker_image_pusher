@@ -111,3 +111,6 @@ p3terx/ariang:latest
 filebrowser/filebrowser:latest
 filebrowser/filebrowser:v2
 filebrowser/filebrowser:v2.31.2
+
+# Zerotier
+zerotier/zerotier:latest
