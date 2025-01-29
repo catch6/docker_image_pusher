@@ -114,3 +114,6 @@ filebrowser/filebrowser:v2.31.2
 
 # Zerotier
 zerotier/zerotier:latest
+
+# Jellyfin
+nyanmisaka/jellyfin:latest
