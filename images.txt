@@ -117,3 +117,6 @@ zerotier/zerotier:latest
 
 # Jellyfin
 nyanmisaka/jellyfin:latest
+
+# Navidrome
+deluan/navidrome:latest
