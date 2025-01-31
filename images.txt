@@ -120,3 +120,7 @@ nyanmisaka/jellyfin:latest
 
 # Navidrome
 deluan/navidrome:latest
+
+# Transcode
+catchlife/transcode:latest
+--platform=linux/arm64 catchlife/transcode:latest
