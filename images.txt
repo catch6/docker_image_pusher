@@ -86,6 +86,7 @@ lobehub/lobe-chat:latest
 # Alist
 xiaoyaliu/alist:latest
 xiaoyaliu/alist:hostmode
+xhofe/alist:latest
 
 # Kafka UI
 provectuslabs/kafka-ui:latest
