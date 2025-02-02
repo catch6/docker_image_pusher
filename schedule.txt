@@ -127,3 +127,6 @@ deluan/navidrome:latest
 # Transcode
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
+
+# Uptime
+louislam/uptime-kuma:latest
