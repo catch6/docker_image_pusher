@@ -1,86 +1,109 @@
-# Docker Images Pusher
+# Docker 镜像推送工具
 
-使用 Github Action 将国外的 Docker 镜像转存到阿里云私有仓库，供国内服务器使用，免费易用<br>
+这是一个基于 Github Action 的工具，可以自动将国外的 Docker 镜像同步到阿里云私有仓库，方便国内服务器使用。
 
-- 支持 DockerHub, gcr.io, k8s.io, ghcr.io 等任意仓库<br>
-- 支持最大 40GB 的大型镜像<br>
-- 使用阿里云的官方线路，速度快<br>
+## 特点
 
-## 使用方式
+- 支持多种镜像源：DockerHub、gcr.io、k8s.io、ghcr.io 等
+- 支持大型镜像：单个最大支持 40GB
+- 使用阿里云官方线路：传输速度快
+- 支持多架构：可指定 arm64、amd64 等
+- 支持定时同步：可配置自动更新
 
-### 配置阿里云
+## 使用教程
 
-登录阿里云容器镜像服务<br>
-https://cr.console.aliyun.com/<br>
-启用个人实例，创建一个命名空间（**ALIYUN_NAME_SPACE**）
-![](/doc/命名空间.png)
+### 1. 配置阿里云
 
-访问凭证–>获取环境变量<br>
-用户名（**ALIYUN_REGISTRY_USER**)<br>
-密码（**ALIYUN_REGISTRY_PASSWORD**)<br>
-仓库地址（**ALIYUN_REGISTRY**）<br>
+1. 登录[阿里云容器镜像服务](https://cr.console.aliyun.com/)
+2. 开通个人实例服务
+3. 创建命名空间（将作为 **ALIYUN_NAME_SPACE**）
+   ![](/doc/命名空间.png)
 
-![](/doc/用户名密码.png)
+4. 获取访问凭证：
+   - 在"访问凭证"页面获取以下信息：
+     - 用户名（**ALIYUN_REGISTRY_USER**）
+     - 密码（**ALIYUN_REGISTRY_PASSWORD**）
+     - 仓库地址（**ALIYUN_REGISTRY**）
+       ![](/doc/用户名密码.png)
 
-### Fork 本项目
+### 2. 配置 Github
 
-Fork 本项目<br>
+1. Fork 本项目到您的账号下
 
-#### 启动 Action
+2. 启用 Actions：
 
-进入您自己的项目，点击 Action，启用 Github Action 功能<br>
+   - 进入您的项目
+   - 点击 Actions 标签页
+   - 确认启用 Github Actions
 
-#### 配置环境变量
+3. 配置密钥：
+   - 进入 Settings -> Secrets and variables -> Actions
+   - 点击 New repository secret
+   - 添加以下四个密钥：
+     - ALIYUN_NAME_SPACE
+     - ALIYUN_REGISTRY_USER
+     - ALIYUN_REGISTRY_PASSWORD
+     - ALIYUN_REGISTRY
+       ![](doc/配置环境变量.png)
 
-进入 Settings->Secret and variables->Actions->New Repository secret
-![](doc/配置环境变量.png)
-将上一步的**四个值**<br>
-ALIYUN_NAME_SPACE,ALIYUN_REGISTRY_USER，ALIYUN_REGISTRY_PASSWORD，ALIYUN_REGISTRY<br>
-配置成环境变量
+### 3. 添加镜像
 
-### 添加镜像
+编辑 schedule.txt 文件，按需添加镜像。支持以下格式：
 
-打开 images.txt 文件，添加你想要的镜像
-可以加 tag，也可以不用(默认 latest)<br>
-可添加 --platform=xxxxx 的参数指定镜像架构<br>
-可使用 k8s.gcr.io/kube-state-metrics/kube-state-metrics 格式指定私库<br>
-可使用 #开头作为注释<br>
-![](doc/images.png)
-文件提交后，自动进入 Github Action 构建
-
-### 使用镜像
-
-回到阿里云，镜像仓库，点击任意镜像，可查看镜像状态。(可以改成公开，拉取镜像免登录)
-![](doc/开始使用.png)
-
-在国内服务器 pull 镜像, 例如：<br>
-
+```bash
+# 基础格式
+nginx
+# 指定版本
+mysql:8.0
+# 指定架构
+--platform=linux/arm64 redis:latest
+# 指定私有仓库
+k8s.gcr.io/kube-state-metrics/kube-state-metrics
+# 使用注释
+# 这是一个注释
 ```
-docker pull registry.cn-hangzhou.aliyuncs.com/shrimp-images/alpine
+
+### 4. 使用镜像
+
+1. 在阿里云镜像仓库中查看同步状态
+2. 可选择将镜像设为公开（无需登录即可拉取）
+   ![](doc/开始使用.png)
+
+3. 在服务器上拉取镜像：
+
+```bash
+docker pull registry.cn-hangzhou.aliyuncs.com/your-namespace/image-name
 ```
 
-registry.cn-hangzhou.aliyuncs.com 即 ALIYUN_REGISTRY(阿里云仓库地址)<br>
-shrimp-images 即 ALIYUN_NAME_SPACE(阿里云命名空间)<br>
-alpine 即 阿里云中显示的镜像名<br>
+### 镜像命名规则
 
-### 多架构
+原始镜像名将按以下规则转换：
 
-需要在 images.txt 中用 --platform=xxxxx 手动指定镜像架构
-指定后的架构会以前缀的形式放在镜像名字前面
-![](doc/多架构.png)
-
-### 镜像重命名规则
-
-```
+```bash
+# 基础镜像
 mysql:8.0 => mysql:8.0
+
+# 带路径的镜像
 bitnami/mysql:8.0 => bitnami-mysql:8.0
-bitnami/mysql:8.0@sha256:ec1e8d95b06e7f78c7f4ee0ed91f835dd39afff7c58e36ba1a4878732b60fcf9 => bitnami-mysql:8.0
+
+# 带 SHA 的镜像
+bitnami/mysql:8.0@sha256:xxx => bitnami-mysql:8.0
+
+# 指定架构的镜像
 --platform=linux/arm64 bitnami/mysql:8.0 => bitnami-mysql:8.0-linux-arm64
+
+# 私有仓库镜像
 gcr.io/cadvisor/cadvisor:v0.39.3 => gcr.io-cadvisor-cadvisor:v0.39.3
 ```
 
-### 定时执行
+### 定时更新
 
-修改/.github/workflows/docker.yaml 文件
-添加 schedule 即可定时执行(此处 cron 使用 UTC 时区)
-![](doc/定时执行.png)
+编辑 `.github/workflows/schedule.yaml` 文件中的 schedule 部分可设置定时执行：
+
+```yaml
+schedule:
+  # UTC 时间星期日 18 点（北京时间周一早上 2 点）
+  - cron: '0 18 * * 0'
+```
+
+> 注意：cron 表达式使用 UTC 时区
