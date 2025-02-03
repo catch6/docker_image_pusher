@@ -1,4 +1,3 @@
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
 
-louislam/uptime-kuma:latest
