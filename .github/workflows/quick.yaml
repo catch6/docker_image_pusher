@@ -12,96 +12,79 @@ env:
   ALIYUN_REGISTRY_PASSWORD: '${{ secrets.ALIYUN_REGISTRY_PASSWORD }}'
 
 jobs:
-  build:
-    name: Pull
+  prepare:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - name: Before freeing up disk space
-        run: |
-          echo "Before freeing up disk space"
-          echo "=============================================================================="
-          df -hT
-          echo "=============================================================================="
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      # 增加可用磁盘空间
-      - name: Maximize build space
+      - id: set-matrix
+        run: |
+          IMAGES=$(grep -v '^#' quick.txt | grep -v '^[[:space:]]*$' | jq -R -s -c 'split("\n")[:-1]')
+          echo "matrix=${IMAGES}" >> $GITHUB_OUTPUT
+
+  process-images:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image: ${{ fromJson(needs.prepare.outputs.matrix) }}
+      fail-fast: false
+      max-parallel: 5
+
+    steps:
+      - name: Free up disk space
         uses: easimon/maximize-build-space@master
         with:
           root-reserve-mb: 2048
           swap-size-mb: 128
           remove-dotnet: 'true'
           remove-haskell: 'true'
-          # 如果空间还是不够用，可以把以下开启，清理出更多空间
-          # remove-android: 'true'
-          # remove-codeql: 'true'
           build-mount-path: '/var/lib/docker/'
 
       - name: Restart docker
         run: sudo service docker restart
 
-      - name: Free up disk space complete
-        run: |
-          echo "Free up disk space complete"
-          echo "=============================================================================="
-          df -hT
-          echo "=============================================================================="
-
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
       - name: Docker Setup Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push image Aliyun
+      - name: Process Single Image
         run: |
           docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
 
-          while IFS= read -r line || [ -n "$line" ]; do
-              # 忽略空行与注释
-              [[ -z "$line" ]] && continue
-              if echo "$line" | grep -q '^\s*#'; then
-                  continue
-              fi
+          line="${{ matrix.image }}"
+          echo "Processing: $line"
 
-              echo "docker pull $line"
-              docker pull $line
+          docker pull $line
 
-              image=$(echo "$line" | awk '{print $NF}')
-              echo "image: $image"
+          image=$(echo "$line" | awk '{print $NF}')
+          echo "image: $image"
 
-              if [[ $line == *"--platform="* ]]; then
-                  platform=$(echo "$line" | grep -oP '(?<=--platform=)[^ ]+')
-                  echo "platform: $platform"
-                  new_image=${image}-${platform}
-              else
-                  new_image=$image
-              fi
+          if [[ $line == *"--platform="* ]]; then
+              platform=$(echo "$line" | grep -oP '(?<=--platform=)[^ ]+')
+              echo "platform: $platform"
+              new_image=${image}-${platform}
+          else
+              new_image=$image
+          fi
 
-              # \改为-
-              new_image=$(echo "$new_image" | sed 's/\//-/g')
+          # \改为-
+          new_image=$(echo "$new_image" | sed 's/\//-/g')
 
-              # 移除@sha256等后缀
-              new_image=$(echo "$new_image" | cut -d '@' -f 1)
+          # 移除@sha256等后缀
+          new_image=$(echo "$new_image" | cut -d '@' -f 1)
 
-              echo "new_image: $new_image"
+          echo "new_image: $new_image"
 
-              new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$new_image"
+          new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$new_image"
 
-              echo "docker tag $image $new_image"
-              docker tag $image $new_image
+          echo "docker tag $image $new_image"
+          docker tag $image $new_image
 
-              echo "docker push $new_image"
-              docker push $new_image
+          echo "docker push $new_image"
+          docker push $new_image
 
-              echo "开始清理磁盘空间"
-              echo "=============================================================================="
-              df -hT
-              echo "=============================================================================="
-              docker rmi $image
-              docker rmi $new_image
-              echo "磁盘空间清理完毕"
-              echo "=============================================================================="
-              df -hT
-              echo "=============================================================================="
-
-          done < quick.txt
+          docker rmi $image
+          docker rmi $new_image
