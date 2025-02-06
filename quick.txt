@@ -1,3 +1,5 @@
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
 
+enmotech/opengauss:5.0.3
+enmotech/opengauss-lite:5.0.3
