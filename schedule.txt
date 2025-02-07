@@ -24,6 +24,10 @@ redis:7.4
 tdengine/tdengine:latest
 tdengine/tdengine:3.3.5.2
 
+# OpenGauss
+enmotech/opengauss:5.0.3
+enmotech/opengauss-lite:5.0.3
+
 # =============== Language ===============
 # JDK
 eclipse-temurin:21-jdk-alpine
@@ -130,3 +134,11 @@ catchlife/transcode:latest
 
 # Uptime
 louislam/uptime-kuma:latest
+
+# AdGuard
+adguard/adguardhome:latest
+
+# Portainer
+portainer/portainer-ce:latest
+portainer/portainer-ce:lts
+portainer/portainer-ce:2.21.5
