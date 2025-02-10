@@ -1,8 +1,2 @@
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
-
-adguard/adguardhome:latest
-
-portainer/portainer-ce:latest
-portainer/portainer-ce:lts
-portainer/portainer-ce:2.21.5
