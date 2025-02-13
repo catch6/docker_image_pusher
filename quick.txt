@@ -1,2 +1,6 @@
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
+
+# OpenGauss
+enmotech/opengauss:latest
+enmotech/opengauss-lite:latest
