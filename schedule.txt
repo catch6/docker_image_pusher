@@ -12,6 +12,9 @@ postgres:16.6
 timescale/timescaledb:latest-pg16
 timescale/timescaledb:2.17.2-pg16
 
+# PGVector
+pgvector/pgvector:pg16
+
 # MongoDB
 mongo:latest
 mongo:8.0

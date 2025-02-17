@@ -1,4 +1,5 @@
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
 
-pgvector/pgvector:pg16
+calciumion/new-api:latest
+justsong/one-api:latest
