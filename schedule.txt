@@ -89,6 +89,7 @@ coredns/coredns:1.12.0
 
 # LobeHub
 lobehub/lobe-chat:latest
+lobehub/lobe-chat-database:latest
 
 # xiaoya
 xiaoyaliu/alist:latest
@@ -145,3 +146,10 @@ adguard/adguardhome:latest
 portainer/portainer-ce:latest
 portainer/portainer-ce:lts
 portainer/portainer-ce:2.21.5
+
+# NewAPI
+calciumion/new-api:latest
+
+# OneAPI
+justsong/one-api:latest
+

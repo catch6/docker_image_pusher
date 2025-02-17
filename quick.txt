@@ -1,5 +1,5 @@
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
 
-calciumion/new-api:latest
-justsong/one-api:latest
+lobehub/lobe-chat:latest
+lobehub/lobe-chat-database:latest
