@@ -153,3 +153,10 @@ calciumion/new-api:latest
 # OneAPI
 justsong/one-api:latest
 
+# Open WebUI
+ghcr.io/open-webui/open-webui:main
+
+# Docmost
+docmost/docmost:latest
+
+

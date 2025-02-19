@@ -1,5 +1,9 @@
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
 
-lobehub/lobe-chat:latest
-lobehub/lobe-chat-database:latest
+# Open WebUI
+ghcr.io/open-webui/open-webui:main
+
+# Docmost
+docmost/docmost:latest
+
