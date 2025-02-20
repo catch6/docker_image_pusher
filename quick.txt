@@ -1,9 +1,8 @@
+# registry.cn-beijing.aliyuncs.com/catch-public/
+
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
 
 # Open WebUI
 ghcr.io/open-webui/open-webui:main
-
-# Docmost
-docmost/docmost:latest
 
