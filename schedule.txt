@@ -4,6 +4,7 @@
 # MySQL
 mysql:latest
 mysql:lts
+mysql:8.4
 mysql:8.0
 
 # PostgreSQL
