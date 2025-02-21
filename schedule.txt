@@ -22,7 +22,10 @@ pgvector/pgvector:pg16
 
 # MongoDB
 mongo:latest
-mongo:8.0
+mongo:nanoserver
+mongo:8-nanoserver
+mongo:8
+
 
 # Redis
 redis:latest

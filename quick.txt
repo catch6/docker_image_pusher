@@ -3,3 +3,7 @@
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
 
+mongo:latest
+mongo:nanoserver
+mongo:8-nanoserver
+mongo:8
