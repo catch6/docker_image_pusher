@@ -8,7 +8,8 @@ mysql:8.0
 
 # PostgreSQL
 postgres:latest
-postgres:16.6
+postgres:17
+postgres:16
 
 # PostgreSQL & TimeScaleDB
 timescale/timescaledb:latest-pg16

@@ -8,3 +8,6 @@ ghcr.io/open-webui/open-webui:main
 
 
 pgvector/pgvector:pg17
+
+postgres:17
+postgres:16
