@@ -25,7 +25,6 @@ mongo:latest
 mongo:8
 mongo:7
 
-
 # Redis
 redis:latest
 redis:7.4

@@ -37,7 +37,7 @@ jobs:
       # 允许部分任务失败
       fail-fast: false
       # 最大并行数，可以根据需要调整
-      max-parallel: 10
+      max-parallel: 20
 
     steps:
       - name: Free up disk space
