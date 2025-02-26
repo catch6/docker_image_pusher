@@ -3,4 +3,4 @@
 #catchlife/transcode:latest
 #--platform=linux/arm64 catchlife/transcode:latest
 
-cloudflare/cloudflared:latest
+apache/kafka:3.7.2
