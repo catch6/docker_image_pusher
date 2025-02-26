@@ -1,5 +1,6 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-catchlife/transcode:latest
---platform=linux/arm64 catchlife/transcode:latest
+#catchlife/transcode:latest
+#--platform=linux/arm64 catchlife/transcode:latest
 
+cloudflare/cloudflared:latest
