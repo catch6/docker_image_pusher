@@ -165,4 +165,5 @@ ghcr.io/open-webui/open-webui:main
 # Docmost
 docmost/docmost:latest
 
-
+# Cloudflared
+cloudflare/cloudflared:latest
