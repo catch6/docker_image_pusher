@@ -168,3 +168,6 @@ docmost/docmost:latest
 
 # Cloudflared
 cloudflare/cloudflared:latest
+
+# EasyTier
+easytier/easytier:latest
