@@ -37,6 +37,10 @@ tdengine/tdengine:3.3.5.2
 enmotech/opengauss:5.0.3
 enmotech/opengauss-lite:5.0.3
 
+# QuestDB
+questdb/questdb:latest
+questdb/questdb:8.2.3
+
 # =============== Language ===============
 # JDK
 eclipse-temurin:21-jdk-alpine
