@@ -3,6 +3,4 @@
 #catchlife/transcode:latest
 #--platform=linux/arm64 catchlife/transcode:latest
 
-# QuestDB
-questdb/questdb:latest
-questdb/questdb:8.2.3
+--platform=linux/arm64 easytier/easytier:latest
