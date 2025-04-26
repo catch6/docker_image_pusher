@@ -176,3 +176,6 @@ cloudflare/cloudflared:latest
 # EasyTier
 easytier/easytier:latest
 --platform=linux/arm64 easytier/easytier:latest
+
+ubuntu:latest
+ubuntu:24.04

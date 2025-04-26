@@ -1,6 +1,4 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-#catchlife/transcode:latest
-#--platform=linux/arm64 catchlife/transcode:latest
-
---platform=linux/arm64 easytier/easytier:latest
+ubuntu:latest
+ubuntu:24.04
