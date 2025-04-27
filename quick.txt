@@ -1,4 +1,3 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-ubuntu:latest
-ubuntu:24.04
+timescale/timescaledb:latest-pg17
