@@ -71,10 +71,13 @@ caddy:2.9-alpine
 xiaosong/caddy-alidns:latest
 
 # EMQX
+emqx:latest
+--platform=linux/arm64 emqx:latest
 emqx/emqx:latest
 --platform=linux/arm64 emqx/emqx:latest
 emqx/emqx:5.8
 --platform=linux/arm64 emqx/emqx:5.8
+
 
 # Kafka
 apache/kafka:latest
