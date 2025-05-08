@@ -1,6 +1,8 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-timescale/timescaledb:latest-pg17
-
 emqx:latest
 --platform=linux/arm64 emqx:latest
+emqx:5.8
+--platform=linux/arm64 emqx:5.8
+
+caddy:2.10

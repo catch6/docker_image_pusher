@@ -65,7 +65,7 @@ nginx:1.27
 
 # Caddy
 caddy:latest
-caddy:2.9-alpine
+caddy:2.10
 
 # Caddy-alidns
 xiaosong/caddy-alidns:latest
@@ -73,6 +73,9 @@ xiaosong/caddy-alidns:latest
 # EMQX
 emqx:latest
 --platform=linux/arm64 emqx:latest
+emqx:5.8
+--platform=linux/arm64 emqx:5.8
+
 emqx/emqx:latest
 --platform=linux/arm64 emqx/emqx:latest
 emqx/emqx:5.8
