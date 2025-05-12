@@ -191,3 +191,6 @@ easytier/easytier:latest
 
 ubuntu:latest
 ubuntu:24.04
+
+
+648540858/wvp_pro:latest
