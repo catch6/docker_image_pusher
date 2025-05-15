@@ -1,5 +1,3 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-648540858/wvp_pro:latest
-
-timescale/timescaledb:latest-pg17
+nodered/node-red:latest
