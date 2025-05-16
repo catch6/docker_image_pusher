@@ -1,3 +1,3 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-n8nio/n8n:latest
+stalwartlabs/mail-server:latest

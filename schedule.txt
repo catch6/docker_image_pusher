@@ -196,3 +196,4 @@ ubuntu:24.04
 648540858/wvp_pro:latest
 nodered/node-red:latest
 n8nio/n8n:latest
+stalwartlabs/mail-server:latest
