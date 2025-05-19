@@ -1,4 +1,3 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-easytier/easytier:latest
---platform=linux/arm64 easytier/easytier:latest
+alpine:latest

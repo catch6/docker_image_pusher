@@ -197,3 +197,5 @@ ubuntu:24.04
 nodered/node-red:latest
 n8nio/n8n:latest
 stalwartlabs/mail-server:latest
+
+alpine:latest
