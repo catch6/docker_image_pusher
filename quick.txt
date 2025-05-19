@@ -1,3 +1,4 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-stalwartlabs/mail-server:latest
+easytier/easytier:latest
+--platform=linux/arm64 easytier/easytier:latest
