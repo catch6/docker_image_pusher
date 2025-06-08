@@ -1,3 +1,3 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-apache/iotdb:2.0.3-standalone
+easytier-easytier:latest
