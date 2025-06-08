@@ -5,8 +5,8 @@ on:
   # push:
   #   branches: [main]
   schedule:
-    # UTC时间星期日18点（北京时间是 UTC+8，即北京时间每周一早上 2 点）
-    - cron: '0 18 * * 0'
+    # UTC时间星期日18点（北京时间是 UTC+8，即北京时间每天早上 2 点）
+    - cron: '0 18 * * *'
 
 env:
   ALIYUN_REGISTRY: '${{ secrets.ALIYUN_REGISTRY }}'
