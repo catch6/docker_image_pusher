@@ -200,3 +200,4 @@ stalwartlabs/mail-server:latest
 alpine:latest
 lmq8267/vnt:latest
 apache/iotdb:2.0.3-standalone
+xm798/caddy:latest
