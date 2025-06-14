@@ -1,3 +1,4 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
 xm798/caddy:latest
+caddy:builder
