@@ -201,3 +201,4 @@ stalwartlabs/mail-server:latest
 alpine:latest
 lmq8267/vnt:latest
 apache/iotdb:2.0.3-standalone
+qdrant/qdrant:latest
