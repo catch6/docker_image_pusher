@@ -202,3 +202,4 @@ alpine:latest
 lmq8267/vnt:latest
 apache/iotdb:2.0.3-standalone
 qdrant/qdrant:latest
+--platform=linux/arm64 qdrant/qdrant:latest
