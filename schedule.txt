@@ -70,7 +70,9 @@ nginx:1.27-alpine
 # Caddy
 caddy:latest
 caddy:2.10
+caddy:2.10.0
 caddy:builder
+caddy:2.10.0-builder
 
 # Caddy-alidns
 xiaosong/caddy-alidns:latest
