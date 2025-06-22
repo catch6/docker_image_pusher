@@ -4,6 +4,7 @@
 # MySQL
 mysql:latest
 mysql:lts
+mysql:8.4.3
 mysql:8.4
 mysql:8.0
 
@@ -31,6 +32,7 @@ mongo:7
 # Redis
 redis:latest
 redis:7.4
+redis:7.4.4
 
 # TDengine
 tdengine/tdengine:latest
