@@ -1,4 +1,4 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-caddy:2.10.0
-caddy:2.10.0-builder
+binwiederhier/ntfy:latest
+binwiederhier/ntfy:v2.12.0
