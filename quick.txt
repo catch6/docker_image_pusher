@@ -1,4 +1,3 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-binwiederhier/ntfy:latest
-binwiederhier/ntfy:v2.12.0
+grafana/grafana:latest
