@@ -208,3 +208,6 @@ apache/iotdb:2.0.3-standalone
 qdrant/qdrant:latest
 --platform=linux/arm64 qdrant/qdrant:latest
 grafana/grafana:latest
+ghcr.io/wg-easy/wg-easy:latest
+ghcr.io/wg-easy/wg-easy:15
+headscale/headscale:stable
