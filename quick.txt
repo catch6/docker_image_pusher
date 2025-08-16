@@ -1,3 +1,4 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
 headscale/headscale:stable
+lmq8267/easytier:latest

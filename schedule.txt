@@ -211,3 +211,4 @@ grafana/grafana:latest
 ghcr.io/wg-easy/wg-easy:latest
 ghcr.io/wg-easy/wg-easy:15
 headscale/headscale:stable
+lmq8267/easytier:latest
