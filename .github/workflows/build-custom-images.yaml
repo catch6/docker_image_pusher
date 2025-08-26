@@ -1,0 +1,106 @@
+name: Build Custom Images
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'docker/**'
+
+env:
+  ALIYUN_REGISTRY: '${{ secrets.ALIYUN_REGISTRY }}'
+  ALIYUN_NAME_SPACE: '${{ secrets.ALIYUN_NAME_SPACE }}'
+  ALIYUN_REGISTRY_USER: '${{ secrets.ALIYUN_REGISTRY_USER }}'
+  ALIYUN_REGISTRY_PASSWORD: '${{ secrets.ALIYUN_REGISTRY_PASSWORD }}'
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - id: set-matrix
+        run: |
+          # 查找所有需要构建的 Docker 镜像目录
+          # 格式: docker/image-name/tag/Dockerfile
+          IMAGES=$(find docker -type f -name "Dockerfile" | sed 's|docker/\(.*\)/\(.*\)/Dockerfile|\1:\2|' | jq -R -s -c 'split("\n")[:-1]')
+          echo "matrix=${IMAGES}" >> $GITHUB_OUTPUT
+
+  build-and-push:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image: ${{ fromJson(needs.prepare.outputs.matrix) }}
+      fail-fast: false
+      max-parallel: 5
+
+    steps:
+      - name: Free up disk space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 2048
+          swap-size-mb: 128
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
+          build-mount-path: '/var/lib/docker/'
+
+      - name: Restart docker
+        run: sudo service docker restart
+
+      - name: Docker Setup Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build and Push Image
+        run: |
+          docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
+
+          # 从矩阵中获取镜像信息
+          image_info="${{ matrix.image }}"
+          echo "Processing: $image_info"
+
+          # 分离镜像名称和标签
+          IFS=':' read -r image_name image_tag <<< "$image_info"
+          echo "Image name: $image_name"
+          echo "Image tag: $image_tag"
+
+          # 构建镜像的完整名称
+          full_image_name="$image_name:$image_tag"
+          echo "Full image name: $full_image_name"
+
+          # 确定 Dockerfile 路径
+          dockerfile_path="docker/$image_name/$image_tag/Dockerfile"
+          echo "Dockerfile path: $dockerfile_path"
+
+          # 检查 Dockerfile 是否存在
+          if [ ! -f "$dockerfile_path" ]; then
+            echo "Dockerfile not found: $dockerfile_path"
+            exit 1
+          fi
+
+          # 使用Dockerfile所在目录作为构建上下文
+          context_path="docker/$image_name/$image_tag"
+          echo "Building image: $full_image_name with context: $context_path"
+          docker build -t "$full_image_name" -f "$dockerfile_path" "$context_path"
+
+          # 构建推送到阿里云的镜像名称
+          aliyun_image_name="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$full_image_name"
+          echo "Aliyun image name: $aliyun_image_name"
+
+          # 标记镜像
+          echo "Tagging image: docker tag $full_image_name $aliyun_image_name"
+          docker tag "$full_image_name" "$aliyun_image_name"
+
+          # 推送镜像
+          echo "Pushing image: docker push $aliyun_image_name"
+          docker push "$aliyun_image_name"
+
+          # 清理镜像
+          docker rmi "$full_image_name"
+          docker rmi "$aliyun_image_name"
