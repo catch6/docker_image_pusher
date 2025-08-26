@@ -212,3 +212,7 @@ ghcr.io/wg-easy/wg-easy:latest
 ghcr.io/wg-easy/wg-easy:15
 headscale/headscale:stable
 lmq8267/easytier:latest
+
+ghcr.io/simstudioai/simstudio:latest
+ghcr.io/simstudioai/realtime:latest
+ghcr.io/simstudioai/migrations:latest

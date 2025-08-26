@@ -1,1 +1,5 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
+
+ghcr.io/simstudioai/simstudio:latest
+ghcr.io/simstudioai/realtime:latest
+ghcr.io/simstudioai/migrations:latest
