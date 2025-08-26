@@ -36,7 +36,7 @@ jobs:
       matrix:
         image: ${{ fromJson(needs.prepare.outputs.matrix) }}
       fail-fast: false
-      max-parallel: 5
+      max-parallel: 10
 
     steps:
       - name: Free up disk space
