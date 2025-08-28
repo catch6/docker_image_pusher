@@ -48,10 +48,26 @@ questdb/questdb:8.2.3
 
 # =============== Language ===============
 # JDK
+eclipse-temurin:21-jdk-noble
+eclipse-temurin:17-jdk-noble
+eclipse-temurin:11-jdk-noble
+eclipse-temurin:8-jdk-noble
+
 eclipse-temurin:21-jdk-alpine
 eclipse-temurin:17-jdk-alpine
 eclipse-temurin:11-jdk-alpine
 eclipse-temurin:8-jdk-alpine
+
+eclipse-temurin:21-jre-alpine
+eclipse-temurin:17-jre-alpine
+eclipse-temurin:11-jre-alpine
+eclipse-temurin:8-jre-alpine
+
+eclipse-temurin:21-jre-noble
+eclipse-temurin:17-jre-noble
+eclipse-temurin:11-jre-noble
+eclipse-temurin:8-jre-noble
+
 
 # NodeJS
 node:22-alpine

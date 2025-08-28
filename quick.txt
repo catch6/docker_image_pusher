@@ -1,5 +1,6 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-ghcr.io/simstudioai/simstudio:latest
-ghcr.io/simstudioai/realtime:latest
-ghcr.io/simstudioai/migrations:latest
+eclipse-temurin:21-jre-alpine
+eclipse-temurin:21-jre-jammy
+eclipse-temurin:21-jre-noble
+
