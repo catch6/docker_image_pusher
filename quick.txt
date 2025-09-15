@@ -1,2 +1,5 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
+# Transcode
+catchlife/transcode:latest
+--platform=linux/arm64 catchlife/transcode:latest
