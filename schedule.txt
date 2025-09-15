@@ -213,13 +213,10 @@ easytier/easytier:latest
 ubuntu:latest
 ubuntu:24.04
 
-
 648540858/wvp_pro:latest
 nodered/node-red:latest
 n8nio/n8n:latest
-stalwartlabs/mail-server:latest
 alpine:latest
-lmq8267/vnt:latest
 apache/iotdb:2.0.3-standalone
 qdrant/qdrant:latest
 --platform=linux/arm64 qdrant/qdrant:latest
@@ -227,8 +224,11 @@ grafana/grafana:latest
 ghcr.io/wg-easy/wg-easy:latest
 ghcr.io/wg-easy/wg-easy:15
 headscale/headscale:stable
-lmq8267/easytier:latest
 
 ghcr.io/simstudioai/simstudio:latest
 ghcr.io/simstudioai/realtime:latest
 ghcr.io/simstudioai/migrations:latest
+
+snowdreamtech/frps:latest
+snowdreamtech/frpc:latest
+

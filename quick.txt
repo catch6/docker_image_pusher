@@ -1,4 +1,2 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-snowdreamtech/frps:latest
-snowdreamtech/frpc:latest
