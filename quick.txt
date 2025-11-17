@@ -1,4 +1,3 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-louislam/uptime-kuma:latest
-louislam/uptime-kuma:2
+

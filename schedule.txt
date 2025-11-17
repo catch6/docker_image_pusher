@@ -10,19 +10,18 @@ mysql:8.0
 
 # PostgreSQL
 postgres:latest
+postgres:18
 postgres:17
 postgres:16
 
 # PostgreSQL & TimeScaleDB
+timescale/timescaledb:latest-pg18
+timescale/timescaledb:2.23.1-pg18
 timescale/timescaledb:latest-pg17
 timescale/timescaledb:2.18.2-pg17
 timescale/timescaledb:latest-pg16
 timescale/timescaledb:2.17.2-pg16
 timescale/timescaledb-ha:pg17
-
-# PGVector
-pgvector/pgvector:pg17
-pgvector/pgvector:pg16
 
 # MongoDB
 mongo:latest
@@ -48,28 +47,34 @@ questdb/questdb:8.2.3
 
 # =============== Language ===============
 # JDK
+eclipse-temurin:25-jdk-noble
 eclipse-temurin:21-jdk-noble
 eclipse-temurin:17-jdk-noble
 eclipse-temurin:11-jdk-noble
 eclipse-temurin:8-jdk-noble
 
+eclipse-temurin:25-jdk-alpine
 eclipse-temurin:21-jdk-alpine
 eclipse-temurin:17-jdk-alpine
 eclipse-temurin:11-jdk-alpine
 eclipse-temurin:8-jdk-alpine
 
-eclipse-temurin:21-jre-alpine
-eclipse-temurin:17-jre-alpine
-eclipse-temurin:11-jre-alpine
-eclipse-temurin:8-jre-alpine
-
+eclipse-temurin:25-jre-noble
 eclipse-temurin:21-jre-noble
 eclipse-temurin:17-jre-noble
 eclipse-temurin:11-jre-noble
 eclipse-temurin:8-jre-noble
 
+eclipse-temurin:25-jre-alpine
+eclipse-temurin:21-jre-alpine
+eclipse-temurin:17-jre-alpine
+eclipse-temurin:11-jre-alpine
+eclipse-temurin:8-jre-alpine
+
 
 # NodeJS
+node:lts-alpine
+node:24-alpine
 node:22-alpine
 node:20-alpine
 node:18-alpine
@@ -110,13 +115,10 @@ apache/kafka:latest
 apache/kafka:3.9.0
 apache/kafka:3.8.1
 apache/kafka:3.7.2
-bitnami/kafka:latest
-bitnami/kafka:3.9.0
-bitnami/kafka:3.8.1
 
 # Nacos
 nacos/nacos-server:latest
-nacos/nacos-server:v2.5.0
+nacos/nacos-server:v2.5.2
 
 # MinIO
 minio/minio:latest
