@@ -1,12 +1,12 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-# =============== DB ===============
+# ============================== DB ==============================
+
 # MySQL
 mysql:latest
 mysql:lts
-mysql:8.4.3
+mysql:8.4.7
 mysql:8.4
-mysql:8.0
 
 # PostgreSQL
 postgres:latest
@@ -18,34 +18,42 @@ postgres:16
 timescale/timescaledb:latest-pg18
 timescale/timescaledb:2.23.1-pg18
 timescale/timescaledb:latest-pg17
-timescale/timescaledb:2.18.2-pg17
+timescale/timescaledb:2.23.1-pg17
 timescale/timescaledb:latest-pg16
-timescale/timescaledb:2.17.2-pg16
+timescale/timescaledb:2.23.1-pg16
 timescale/timescaledb-ha:pg17
 
 # MongoDB
 mongo:latest
 mongo:8
+mongo:8.2
 mongo:7
+mongo:7.0
 
 # Redis
 redis:latest
+redis:8
+redis:8.2
+redis:7
 redis:7.4
-redis:7.4.4
+redis:6
+redis:6.2
 
 # TDengine
 tdengine/tdengine:latest
-tdengine/tdengine:3.3.5.2
+tdengine/tdengine:3.3.6.13
+
+# QuestDB
+questdb/questdb:latest
+questdb/questdb:9.2.0
+questdb/questdb:8.2.3
 
 # OpenGauss
 enmotech/opengauss:5.0.3
 enmotech/opengauss-lite:5.0.3
 
-# QuestDB
-questdb/questdb:latest
-questdb/questdb:8.2.3
+# ============================== Language ==============================
 
-# =============== Language ===============
 # JDK
 eclipse-temurin:25-jdk-noble
 eclipse-temurin:21-jdk-noble
@@ -84,9 +92,10 @@ node:16-alpine
 # Nginx
 nginx:latest
 nginx:stable
-nginx:1.27
-nginx:stable-alpine
-nginx:1.27-alpine
+nginx:1.28
+
+# automated HTTPS server powered by Nginx⁠
+steveltn/https-portal:latest
 
 # Caddy
 caddy:latest
@@ -99,13 +108,10 @@ caddy:2.10.0-builder
 xiaosong/caddy-alidns:latest
 
 # EMQX
-emqx:latest
---platform=linux/arm64 emqx:latest
-emqx:5.8
---platform=linux/arm64 emqx:5.8
-
 emqx/emqx:latest
 --platform=linux/arm64 emqx/emqx:latest
+emqx/emqx:5.10.2
+--platform=linux/arm64 emqx/emqx:5.10.2
 emqx/emqx:5.8
 --platform=linux/arm64 emqx/emqx:5.8
 
@@ -133,22 +139,8 @@ gitea/act_runner:latest
 coredns/coredns:latest
 coredns/coredns:1.12.0
 
-# LobeHub
-lobehub/lobe-chat:latest
-lobehub/lobe-chat-database:latest
-
-# xiaoya
-xiaoyaliu/alist:latest
-xiaoyaliu/alist:hostmode
-
-# Alist
-xhofe/alist:latest
-
 # Kafka UI
 provectuslabs/kafka-ui:latest
-
-# Yapi
-xuweijie1015/yapi:latest
 
 # Confluence
 haxqer/confluence:9.2.0
@@ -182,28 +174,18 @@ deluan/navidrome:latest
 catchlife/transcode:latest
 --platform=linux/arm64 catchlife/transcode:latest
 
-# Uptime
-louislam/uptime-kuma:latest
-
 # AdGuard
 adguard/adguardhome:latest
-
-# Portainer
-portainer/portainer-ce:latest
-portainer/portainer-ce:lts
-portainer/portainer-ce:2.21.5
-
-# NewAPI
-calciumion/new-api:latest
-
-# OneAPI
-justsong/one-api:latest
 
 # Open WebUI
 ghcr.io/open-webui/open-webui:main
 
 # Docmost
 docmost/docmost:latest
+
+# Outline
+outlinewiki/outline:latest
+outlinewiki/outline:1.1.0
 
 # Cloudflared
 cloudflare/cloudflared:latest
@@ -216,20 +198,19 @@ ubuntu:latest
 ubuntu:24.04
 
 648540858/wvp_pro:latest
+
 nodered/node-red:latest
+
 n8nio/n8n:latest
+
 alpine:latest
-apache/iotdb:2.0.3-standalone
-qdrant/qdrant:latest
---platform=linux/arm64 qdrant/qdrant:latest
+
 grafana/grafana:latest
+
 ghcr.io/wg-easy/wg-easy:latest
 ghcr.io/wg-easy/wg-easy:15
-headscale/headscale:stable
 
-ghcr.io/simstudioai/simstudio:latest
-ghcr.io/simstudioai/realtime:latest
-ghcr.io/simstudioai/migrations:latest
+headscale/headscale:stable
 
 snowdreamtech/frps:latest
 snowdreamtech/frpc:latest
