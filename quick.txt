@@ -1,3 +1,4 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-
+emqx/emqx:5.8.8
+--platform=linux/arm64 emqx/emqx:5.8.8
