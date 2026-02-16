@@ -7,6 +7,10 @@ on:
     paths:
       - 'docker/**'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   ALIYUN_REGISTRY: '${{ secrets.ALIYUN_REGISTRY }}'
   ALIYUN_NAME_SPACE: '${{ secrets.ALIYUN_NAME_SPACE }}'
@@ -55,7 +59,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build and Push Image
         run: |
@@ -70,12 +74,9 @@ jobs:
           echo "Image name: $image_name"
           echo "Image tag: $image_tag"
 
-          # 构建镜像的完整名称
-          full_image_name="$image_name:$image_tag"
-          echo "Full image name: $full_image_name"
-
-          # 确定 Dockerfile 路径
+          # 确定 Dockerfile 路径和构建上下文
           dockerfile_path="docker/$image_name/$image_tag/Dockerfile"
+          context_path="docker/$image_name/$image_tag"
           echo "Dockerfile path: $dockerfile_path"
 
           # 检查 Dockerfile 是否存在
@@ -84,23 +85,17 @@ jobs:
             exit 1
           fi
 
-          # 使用Dockerfile所在目录作为构建上下文
-          context_path="docker/$image_name/$image_tag"
-          echo "Building image: $full_image_name with context: $context_path"
-          docker build -t "$full_image_name" -f "$dockerfile_path" "$context_path"
-
           # 构建推送到阿里云的镜像名称
-          aliyun_image_name="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$full_image_name"
-          echo "Aliyun image name: $aliyun_image_name"
+          aliyun_image_name="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$image_name:$image_tag"
+          echo "Building and pushing: $aliyun_image_name"
 
-          # 标记镜像
-          echo "Tagging image: docker tag $full_image_name $aliyun_image_name"
-          docker tag "$full_image_name" "$aliyun_image_name"
-
-          # 推送镜像
-          echo "Pushing image: docker push $aliyun_image_name"
-          docker push "$aliyun_image_name"
-
-          # 清理镜像
-          docker rmi "$full_image_name"
-          docker rmi "$aliyun_image_name"
+          # 使用 buildx 构建并直接推送（带重试）
+          for i in 1 2 3; do
+            docker buildx build --push \
+              --provenance=false \
+              -t "$aliyun_image_name" \
+              -f "$dockerfile_path" \
+              "$context_path" && break
+            echo "Build/push failed, retrying in 10s... ($i/3)"
+            sleep 10
+          done

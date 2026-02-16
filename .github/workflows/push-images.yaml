@@ -1,0 +1,97 @@
+name: Push Images
+
+on:
+  workflow_call:
+    inputs:
+      images:
+        required: true
+        type: string
+        description: 'JSON array of images to process'
+    secrets:
+      ALIYUN_REGISTRY:
+        required: true
+      ALIYUN_NAME_SPACE:
+        required: true
+      ALIYUN_REGISTRY_USER:
+        required: true
+      ALIYUN_REGISTRY_PASSWORD:
+        required: true
+
+jobs:
+  process-images:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image: ${{ fromJson(inputs.images) }}
+      fail-fast: false
+      max-parallel: 10
+
+    env:
+      ALIYUN_REGISTRY: ${{ secrets.ALIYUN_REGISTRY }}
+      ALIYUN_NAME_SPACE: ${{ secrets.ALIYUN_NAME_SPACE }}
+      ALIYUN_REGISTRY_USER: ${{ secrets.ALIYUN_REGISTRY_USER }}
+      ALIYUN_REGISTRY_PASSWORD: ${{ secrets.ALIYUN_REGISTRY_PASSWORD }}
+
+    steps:
+      - name: Free up disk space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 2048
+          swap-size-mb: 128
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
+          build-mount-path: '/var/lib/docker/'
+
+      - name: Restart docker
+        run: sudo service docker restart
+
+      - name: Docker Setup Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Process Single Image
+        run: |
+          docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
+
+          line="${{ matrix.image }}"
+          echo "Processing: $line"
+
+          # 拉取镜像（带重试）
+          for i in 1 2 3; do
+            docker pull $line && break
+            echo "Pull failed, retrying in 10s... ($i/3)"
+            sleep 10
+          done
+
+          image=$(echo "$line" | awk '{print $NF}')
+          echo "image: $image"
+
+          if [[ $line == *"--platform="* ]]; then
+              platform=$(echo "$line" | grep -oP '(?<=--platform=)[^ ]+')
+              echo "platform: $platform"
+              new_image=${image}-${platform}
+          else
+              new_image=$image
+          fi
+
+          # /改为-
+          new_image=$(echo "$new_image" | sed 's/\//-/g')
+
+          # 移除@sha256等后缀
+          new_image=$(echo "$new_image" | cut -d '@' -f 1)
+
+          echo "new_image: $new_image"
+
+          new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$new_image"
+
+          echo "docker tag $image $new_image"
+          docker tag $image $new_image
+
+          # 推送镜像（带重试）
+          for i in 1 2 3; do
+            docker push $new_image && break
+            echo "Push failed, retrying in 10s... ($i/3)"
+            sleep 10
+          done
+
+          docker rmi $image
+          docker rmi $new_image
