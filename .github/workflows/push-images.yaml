@@ -34,22 +34,10 @@ jobs:
 
     steps:
       - name: Free up disk space
-        uses: easimon/maximize-build-space@v10
-        with:
-          root-reserve-mb: 20480
-          swap-size-mb: 1024
-          remove-dotnet: 'true'
-          remove-android: 'true'
-          remove-haskell: 'true'
-          remove-codeql: 'true'
-          remove-docker-images: 'true'
-          build-mount-path: '/var/lib/docker/'
-
-      - name: Restart docker
-        run: sudo service docker restart
-
-      - name: Docker Setup Buildx
-        uses: docker/setup-buildx-action@v3
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
+          df -h
 
       - name: Process Single Image
         run: |
