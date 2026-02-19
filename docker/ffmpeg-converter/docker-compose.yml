@@ -1,0 +1,27 @@
+services:
+  ffmpeg-converter:
+    build: .
+    image: ffmpeg-converter:1.0.0
+    container_name: ffmpeg-converter
+    restart: unless-stopped
+    # 资源限制，防止耗尽宿主机资源
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2G
+        reservations:
+          cpus: "0.5"
+          memory: 256M
+    # 兼容旧版 docker-compose
+    cpus: 2.0
+    mem_limit: 2g
+    mem_reservation: 256m
+    volumes:
+      - ./input:/app/input
+      - ./output:/app/output
+      - ./logs:/app/logs
+    environment:
+      - FFMPEG_THREADS=2
+      - CRF=20
+      - POLL_INTERVAL=5
