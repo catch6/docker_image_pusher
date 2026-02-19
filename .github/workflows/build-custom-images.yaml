@@ -25,16 +25,37 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
 
       - id: set-matrix
         run: |
-          # 查找所有需要构建的 Docker 镜像目录
-          # 格式: docker/image-name/tag/Dockerfile
-          IMAGES=$(find docker -type f -name "Dockerfile" | sed 's|docker/\(.*\)/\(.*\)/Dockerfile|\1:\2|' | jq -R -s -c 'split("\n")[:-1]')
+          # 所有镜像列表
+          ALL_IMAGES=$(find docker -type f -name "Dockerfile" | sed 's|docker/\(.*\)/\(.*\)/Dockerfile|\1:\2|' | sort)
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # 手动触发：构建全部镜像
+            IMAGES=$(echo "$ALL_IMAGES" | jq -R -s -c 'split("\n")[:-1]')
+          else
+            # push 触发：只构建变更目录下的镜像
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- docker/)
+            CHANGED_IMAGES=""
+            for img in $ALL_IMAGES; do
+              IFS=':' read -r name tag <<< "$img"
+              # 检查该镜像目录下是否有文件变更
+              if echo "$CHANGED_FILES" | grep -q "^docker/${name}/${tag}/"; then
+                CHANGED_IMAGES="${CHANGED_IMAGES}${img}"$'\n'
+              fi
+            done
+            IMAGES=$(echo "$CHANGED_IMAGES" | grep -v '^$' | jq -R -s -c 'split("\n")[:-1]')
+          fi
+
           echo "matrix=${IMAGES}" >> $GITHUB_OUTPUT
+          echo "Images to build: ${IMAGES}"
 
   build-and-push:
     needs: prepare
+    if: ${{ needs.prepare.outputs.matrix != '[]' && needs.prepare.outputs.matrix != '' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
