@@ -1,10 +1,8 @@
 services:
   ffmpeg-converter:
-    build: ./latest
-    image: ffmpeg-converter:1.0.0
+    image: registry.cn-beijing.aliyuncs.com/catch-public/ffmpeg-converter:1.0.0
     container_name: ffmpeg-converter
     restart: unless-stopped
-    # 资源限制，防止耗尽宿主机资源
     deploy:
       resources:
         limits:
@@ -13,11 +11,9 @@ services:
         reservations:
           cpus: "0.5"
           memory: 256M
-    # 兼容旧版 docker-compose
-    cpus: 2.0
-    mem_limit: 2g
-    mem_reservation: 256m
     volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
       - ./input:/app/input
       - ./output:/app/output
       - ./logs:/app/logs
