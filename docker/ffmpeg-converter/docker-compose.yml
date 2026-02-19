@@ -1,6 +1,6 @@
 services:
   ffmpeg-converter:
-    build: .
+    build: ./latest
     image: ffmpeg-converter:1.0.0
     container_name: ffmpeg-converter
     restart: unless-stopped
