@@ -1,9 +1,0 @@
-input/
-output/
-logs/
-processing/
-README.md
-docker-compose.yml
-.dockerignore
-.git
-.gitignore
