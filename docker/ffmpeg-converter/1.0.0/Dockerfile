@@ -11,7 +11,7 @@ RUN mkdir -p /app/input /app/output /app/processing /app/logs
 COPY convert.sh /app/convert.sh
 RUN chmod +x /app/convert.sh
 
-VOLUME ["/app/input", "/app/output", "/app/logs"]
+VOLUME ["/app/input", "/app/output", "/app/processing", "/app/logs"]
 
 ENV FFMPEG_THREADS=2
 ENV CRF=20
