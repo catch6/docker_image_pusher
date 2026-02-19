@@ -58,14 +58,20 @@ convert_video() {
 
     local tmp_output="$PROCESSING_DIR/${name_no_ext}_tmp.mp4"
 
+    # 获取视频时长（秒），用于计算进度百分比
+    local duration
+    duration=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$processing_file" 2>/dev/null | cut -d. -f1)
+    duration=${duration:-0}
+
     # 使用 nice 降低进程优先级，防止抢占宿主机资源
-    if nice -n 19 ffmpeg -y -i "$processing_file" \
+    # -loglevel warning: 仅输出警告和错误，不输出逐帧进度
+    # -stats_period 60: 每 60 秒输出一次统计信息
+    if nice -n 19 ffmpeg -y -loglevel warning -stats_period 60 -i "$processing_file" \
         -c:v libx264 \
         -preset slow \
         -crf "$CRF" \
         -profile:v high \
         -level 4.1 \
-        -tune zerolatency \
         -threads "$FFMPEG_THREADS" \
         -vf "scale='min(iw,1920)':'min(ih,1080)':force_original_aspect_ratio=decrease:flags=lanczos,pad=ceil(iw/2)*2:ceil(ih/2)*2,format=yuv420p" \
         -movflags +faststart \
