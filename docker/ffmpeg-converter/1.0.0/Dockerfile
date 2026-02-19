@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3
 
 LABEL maintainer="zhanghao"
 LABEL version="1.0.0"
