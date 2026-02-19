@@ -15,6 +15,7 @@ services:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
       - ./input:/app/input
+      - ./processing:/app/processing
       - ./output:/app/output
       - ./logs:/app/logs
     environment:
