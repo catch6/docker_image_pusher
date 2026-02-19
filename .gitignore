@@ -1,0 +1,15 @@
+# OS generated files
+.DS_Store
+*.pem
+
+# Editor and IDE
+.idea/
+.vscode/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
