@@ -1,7 +1,6 @@
 FROM alpine:3
 
-LABEL maintainer="zhanghao"
-LABEL version="1.0.0"
+LABEL maintainer="Catch"
 LABEL description="FFmpeg H.264 视频转换服务 - 监听目录自动转码（Web 优化）"
 
 RUN apk add --no-cache ffmpeg bash coreutils

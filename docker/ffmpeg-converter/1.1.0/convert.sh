@@ -107,7 +107,7 @@ recover_interrupted() {
 }
 
 log "========================================="
-log "FFmpeg 视频转换服务启动 v1.0.0"
+log "FFmpeg 视频转换服务启动"
 log "线程数: $FFMPEG_THREADS | CRF: $CRF | 轮询间隔: ${POLL_INTERVAL}s"
 log "========================================="
 
