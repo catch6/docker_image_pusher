@@ -58,15 +58,10 @@ convert_video() {
 
     local tmp_output="$PROCESSING_DIR/${name_no_ext}_tmp.mp4"
 
-    # 获取视频时长（秒），用于计算进度百分比
-    local duration
-    duration=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$processing_file" 2>/dev/null | cut -d. -f1)
-    duration=${duration:-0}
-
     # 使用 nice 降低进程优先级，防止抢占宿主机资源
     # -stats_period 60: 每 60 秒输出一次进度统计
     if nice -n 19 ffmpeg -y -stats -stats_period 60 -i "$processing_file" \
-        -map 0:v:0 -map 0:a:0 \
+        -map 0:v:0 -map 0:a:0? \
         -c:v libx264 \
         -preset slow \
         -crf "$CRF" \
@@ -106,7 +101,7 @@ recover_interrupted() {
 }
 
 log "========================================="
-log "FFmpeg 视频转换服务启动 v1.0.0"
+log "FFmpeg 视频转换服务启动"
 log "线程数: $FFMPEG_THREADS | CRF: $CRF | 轮询间隔: ${POLL_INTERVAL}s"
 log "========================================="
 
