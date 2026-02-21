@@ -28,7 +28,8 @@ log() {
 # 为管道数据逐行添加时间戳前缀，用于 ffmpeg 等外部命令的输出
 ts_pipe() {
     # ffmpeg -stats 进度输出使用 \r 而非 \n，需转换才能逐行读取
-    tr '\r' '\n' | while IFS= read -r line; do
+    # stdbuf -oL 强制行缓冲，避免管道全缓冲导致进度输出卡住
+    stdbuf -oL tr '\r' '\n' | while IFS= read -r line; do
         [ -n "$line" ] && echo "[$(timestamp)] $line"
     done | tee -a "$LOG_FILE"
 }
