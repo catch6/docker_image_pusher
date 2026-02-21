@@ -37,6 +37,14 @@ k8s.gcr.io/kube-state-metrics/kube-state-metrics # 私有仓库
 
 添加新自定义镜像时，必须按 `docker/<name>/<tag>/Dockerfile` 结构组织。构建矩阵通过 `find docker -type f -name "Dockerfile"` 自动发现，目录名直接对应最终镜像名和标签。
 
+### 版本不可变原则
+
+已发布的版本目录**禁止修改**。需要改动时，必须将当前最新版本目录完整复制为新的 patch 版本，在新目录中进行修改。例如当前最新版本为 `docker/ffmpeg-converter/1.2.3/`，则：
+
+1. `cp -r docker/ffmpeg-converter/1.2.3 docker/ffmpeg-converter/1.2.4`
+2. 在 `docker/ffmpeg-converter/1.2.4/` 中进行修改
+3. 提交新版本目录，不要触碰旧版本
+
 ## 所需 GitHub Secrets
 
 - `ALIYUN_REGISTRY` — 阿里云仓库地址（如 registry.cn-beijing.aliyuncs.com）
