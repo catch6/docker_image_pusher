@@ -110,6 +110,8 @@ xiaosong/caddy-alidns:latest
 # EMQX
 emqx/emqx:latest
 --platform=linux/arm64 emqx/emqx:latest
+emqx/emqx:5.8.9
+--platform=linux/arm64 emqx/emqx:5.8.9
 emqx/emqx:5.8.8
 --platform=linux/arm64 emqx/emqx:5.8.8
 emqx/emqx:5.8
