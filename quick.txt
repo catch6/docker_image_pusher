@@ -1,4 +1,6 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-emqx/emqx:5.8.9
---platform=linux/arm64 emqx/emqx:5.8.9
+node:24-slim
+node:24-alpine
+node:22-slim
+node:22-alpine
