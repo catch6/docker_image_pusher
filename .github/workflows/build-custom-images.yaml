@@ -16,6 +16,8 @@ env:
   ALIYUN_NAME_SPACE: '${{ secrets.ALIYUN_NAME_SPACE }}'
   ALIYUN_REGISTRY_USER: '${{ secrets.ALIYUN_REGISTRY_USER }}'
   ALIYUN_REGISTRY_PASSWORD: '${{ secrets.ALIYUN_REGISTRY_PASSWORD }}'
+  DOCKERHUB_USERNAME: '${{ secrets.DOCKERHUB_USERNAME }}'
+  DOCKERHUB_TOKEN: '${{ secrets.DOCKERHUB_TOKEN }}'
 
 jobs:
   prepare:
@@ -75,6 +77,7 @@ jobs:
       - name: Build and Push Image
         run: |
           docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
 
           # 从矩阵中获取镜像信息
           image_info="${{ matrix.image }}"
@@ -98,13 +101,15 @@ jobs:
 
           # 构建推送到阿里云的镜像名称
           aliyun_image_name="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$image_name:$image_tag"
-          echo "Building and pushing: $aliyun_image_name"
+          dockerhub_image_name="$DOCKERHUB_USERNAME/$image_name:$image_tag"
+          echo "Building and pushing: $aliyun_image_name, $dockerhub_image_name"
 
           # 使用 buildx 构建并直接推送（带重试）
           for i in 1 2 3; do
             docker buildx build --push \
               --provenance=false \
               -t "$aliyun_image_name" \
+              -t "$dockerhub_image_name" \
               -f "$dockerfile_path" \
               "$context_path" && break
             echo "Build/push failed, retrying in 10s... ($i/3)"
