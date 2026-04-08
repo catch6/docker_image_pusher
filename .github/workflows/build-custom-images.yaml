@@ -76,8 +76,8 @@ jobs:
 
       - name: Build and Push Image
         run: |
-          docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
-          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
+          echo "$ALIYUN_REGISTRY_PASSWORD" | docker login -u $ALIYUN_REGISTRY_USER --password-stdin $ALIYUN_REGISTRY
+          echo "$DOCKERHUB_TOKEN" | docker login -u $DOCKERHUB_USERNAME --password-stdin
 
           # 从矩阵中获取镜像信息
           image_info="${{ matrix.image }}"
