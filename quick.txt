@@ -1,6 +1,4 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
 
-node:24-slim
-node:24-alpine
-node:22-slim
-node:22-alpine
+gangz1o/glash:latest
+gangz1o/glash:2.2.0

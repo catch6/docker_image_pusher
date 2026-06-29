@@ -218,3 +218,6 @@ snowdreamtech/frpc:latest
 
 louislam/uptime-kuma:latest
 louislam/uptime-kuma:2
+
+gangz1o/glash:latest
+gangz1o/glash:2.2.0
