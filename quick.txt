@@ -1,4 +1,8 @@
 # registry.cn-beijing.aliyuncs.com/catch-public/
+# a:latest -> registry.cn-beijing.aliyuncs.com/catch-public/a:latest
+# a/b:latest -> registry.cn-beijing.aliyuncs.com/catch-public/a-b:latest
+# --platform=linux/arm64 a/b:latest -> registry.cn-beijing.aliyuncs.com/catch-public/a-b:latest-linux-arm64
+# gcr.io/a/b:latest  -> registry.cn-beijing.aliyuncs.com/catch-public/gcr.io-a-b:latest
 
 gangz1o/glash:latest
 gangz1o/glash:2.2.0
