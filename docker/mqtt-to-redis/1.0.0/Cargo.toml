@@ -1,0 +1,21 @@
+[package]
+name = "mqtt-to-redis"
+version = "1.0.0"
+edition = "2024"
+
+[[bin]]
+name = "mqtt-to-redis"
+path = "main.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+rumqttc = "0.25"
+redis = { version = "1", features = ["tokio-comp", "connection-manager"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["raw_value"] }
+toml = "1"
+chrono = "0.4"
+
+[profile.release]
+strip = true
+lto = true

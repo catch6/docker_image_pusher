@@ -1,0 +1,7 @@
+target/
+config.toml
+logs/
+.git/
+.dockerignore
+Dockerfile
+tests

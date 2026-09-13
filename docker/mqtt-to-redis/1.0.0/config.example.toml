@@ -1,0 +1,26 @@
+# MQTT 连接
+[mqtt]
+host = "broker.example.com"             # 纯主机名或 IP，IPv6 填 ::1，不带方括号
+port = 1883                            # 必填，1–65535，固定明文 TCP
+client_id = "mqtt-to-redis"               # 客户端 ID，多实例部署须唯一
+username = "<username>"
+password = "<password>"
+topic = "a/+/b/+/data"                    # 订阅主题，支持 + 单级与 # 多级通配，任意层级数
+qos = 1                                   # QoS 1：至少一次投递，重复由 HSET 天然幂等吸收
+
+# Redis 连接
+[redis]
+host = "redis.example.com"              # 纯主机名或 IP，不带协议、路径、端口
+port = 6379                            # 必填，1–65535，固定明文 TCP
+password = "<password>"                 # 原始密码，无需 URL 编码
+db = 0
+
+# 待写消息缓冲区（可省略整个配置段，使用以下默认值）
+[buffer]
+max_messages = 1000000                  # 待写消息条数上限；满时丢最旧、保留新消息
+flush_interval_ms = 500                 # 刷新间隔（毫秒），到时写出剩余消息
+batch_size = 500                        # 单批条数上限，积满立即写入
+
+# 以上三个属性均可独立省略，值必须大于 0；不限制消息字节数
+# 条数或时间先到即批量写入 Redis；每 10 秒汇总一次日志
+# key 规则：消息 topic 的 '/' 替换为 ':'，如 a/b/c -> a:b:c，无任何硬编码结构
