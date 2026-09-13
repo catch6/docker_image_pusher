@@ -1,0 +1,8 @@
+# 自定义镜像平台覆盖表，未列出的镜像默认构建 linux/amd64,linux/arm64
+# 两种格式：
+#   镜像名:标签 平台列表   —— 仅该版本生效
+#   镜像名 平台列表         —— 该镜像全部版本生效（适合长期单架构的软件）
+# 精确的 镜像名:标签 优先于镜像名匹配
+# 示例：
+# mqtt-to-redis linux/amd64,linux/arm64
+# ffmpeg-converter:2.0.1 linux/amd64
