@@ -131,10 +131,6 @@ apache/kafka:3.7.2
 nacos/nacos-server:latest
 nacos/nacos-server:v2.5.2
 
-# MinIO
-minio/minio:latest
-minio/minio:RELEASE.2025-01-20T14-49-07Z
-
 # Gitea
 gitea/gitea:latest
 gitea/gitea:1.23
@@ -174,10 +170,6 @@ nyanmisaka/jellyfin:latest
 
 # Navidrome
 deluan/navidrome:latest
-
-# Transcode
-catchlife/transcode:latest
---platform=linux/arm64 catchlife/transcode:latest
 
 # AdGuard
 adguard/adguardhome:latest
