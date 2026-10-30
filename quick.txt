@@ -6,3 +6,5 @@
 
 gangz1o/glash:latest
 gangz1o/glash:2.2.0
+
+eclipse-temurin:25-jre-jammy
