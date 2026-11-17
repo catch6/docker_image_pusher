@@ -59,11 +59,11 @@ enmotech/opengauss-lite:5.0.3
 # ============================== Language ==============================
 
 # JDK
-eclipse-temurin:25-jdk-noble
-eclipse-temurin:21-jdk-noble
-eclipse-temurin:17-jdk-noble
-eclipse-temurin:11-jdk-noble
-eclipse-temurin:8-jdk-noble
+eclipse-temurin:25-jdk
+eclipse-temurin:21-jdk
+eclipse-temurin:17-jdk
+eclipse-temurin:11-jdk
+eclipse-temurin:8-jdk
 
 eclipse-temurin:25-jdk-alpine
 eclipse-temurin:21-jdk-alpine
@@ -71,11 +71,11 @@ eclipse-temurin:17-jdk-alpine
 eclipse-temurin:11-jdk-alpine
 eclipse-temurin:8-jdk-alpine
 
-eclipse-temurin:25-jre-noble
-eclipse-temurin:21-jre-noble
-eclipse-temurin:17-jre-noble
-eclipse-temurin:11-jre-noble
-eclipse-temurin:8-jre-noble
+eclipse-temurin:25-jre
+eclipse-temurin:21-jre
+eclipse-temurin:17-jre
+eclipse-temurin:11-jre
+eclipse-temurin:8-jre
 
 eclipse-temurin:25-jre-alpine
 eclipse-temurin:21-jre-alpine
