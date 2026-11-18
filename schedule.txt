@@ -104,6 +104,8 @@ steveltn/https-portal:latest
 
 # Caddy
 caddy:latest
+caddy:2
+caddy:2-alpine
 caddy:2.10
 caddy:2.10.0
 caddy:builder

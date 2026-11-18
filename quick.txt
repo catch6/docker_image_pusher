@@ -4,7 +4,5 @@
 # --platform=linux/arm64 a/b:latest -> registry.cn-beijing.aliyuncs.com/catch-public/a-b:latest-linux-arm64
 # gcr.io/a/b:latest  -> registry.cn-beijing.aliyuncs.com/catch-public/gcr.io-a-b:latest
 
-gangz1o/glash:latest
-gangz1o/glash:2.2.0
-
-eclipse-temurin:25-jre-jammy
+caddy:2
+caddy:2-alpine
