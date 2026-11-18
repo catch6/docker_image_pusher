@@ -20,11 +20,13 @@ postgres:16
 
 # PostgreSQL & TimeScaleDB
 timescale/timescaledb:latest-pg18
+timescale/timescaledb:2.32.0-pg18
 timescale/timescaledb:2.23.1-pg18
 timescale/timescaledb:latest-pg17
 timescale/timescaledb:2.23.1-pg17
 timescale/timescaledb:latest-pg16
 timescale/timescaledb:2.23.1-pg16
+timescale/timescaledb-ha:pg18
 timescale/timescaledb-ha:pg17
 
 # MongoDB
@@ -144,8 +146,9 @@ coredns/coredns:1.12.0
 provectuslabs/kafka-ui:latest
 
 # Confluence
-haxqer/confluence:9.2.0
-haxqer/confluence:8.5.18
+haxqer/confluence:10.0.2
+haxqer/confluence:9.5.3
+haxqer/confluence:8.5.19
 
 # Jira
 haxqer/jira:10.3.2
@@ -216,4 +219,4 @@ louislam/uptime-kuma:latest
 louislam/uptime-kuma:2
 
 gangz1o/glash:latest
-gangz1o/glash:2.2.0
+gangz1o/glash:2.2.8
