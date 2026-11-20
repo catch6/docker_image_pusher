@@ -6,3 +6,4 @@
 
 caddy:2
 caddy:2-alpine
+timescale/timescaledb:2.32.0-pg18
